@@ -1,0 +1,221 @@
+*{
+    padding: 0%;
+    margin:0%; 
+    box-sizing: border-bx;
+ }
+ body{
+    min-width:100vh;
+    min-height:100vh;
+ }
+ :root{--primary-color:#26BAEE;
+    --secondary-color:#FFFFFF;  
+    --MX_width:100%;
+    --MX_height:100%; 
+--content:.c-1,.c-2,.c-3;}
+ .bg{
+     width:var(--MX_width);
+     height: 70vh;
+     background: url(../Image&Svg/background-home.png),no-repeat;
+     background-size: cover;
+ }
+ .info{
+     width: var(--MX_width);
+     height:5vh;
+     background-color:var(--primary-color);
+     display: flex;
+     flex-direction:row !important;
+ }
+ .info-left,.info-right{
+     width: 50%;
+     height: var(--MX_height);
+     display: flex;
+     align-items: center;
+     margin:0px 20px 0px 20px ; 
+ }
+ .info-right{
+     justify-content: end;
+ }
+ #i1,#i2,#i3{
+     font-family: Istok Web;
+     font-size: 15px;
+     font-style: normal;
+     font-weight: 400;
+     line-height: normal;
+     color:var(--secondary-color);
+     padding:0 15px 0 15px;
+     border-right:2px var(--secondary-color) solid;
+ }
+ #i4,#i5,#i6,#i7,#i8{
+ font-family: Istok Web;
+ font-size: 16px;
+ font-style: normal;
+ font-weight: 400;
+ line-height: normal;
+ color:var(--secondary-color);
+ padding: 0px 10px 0 10px;
+ }
+ .info a:hover{
+    transform: scale(1.2);
+ }
+ .info a{
+     text-decoration: none;
+ }
+ .nav{
+     width: var(--MX_width);
+     height: 13vh;
+     background-color: rgba(0, 0, 0, 0.70);
+     display: flex;
+     justify-content: space-evenly;
+     
+ }
+ .nav1{
+  width: 20%;
+   height: var(--MX_height);
+   display: flex;
+   justify-content: start;
+   align-items: center;
+ }
+ #logohome{
+width:140px;
+height:80px;
+ }
+ #n1{
+     margin-left: 20px;
+ }
+ .nav2{
+     width: 80%;
+     height: var(--MX_height);
+     display: flex;
+     justify-content:end;
+     align-items:end;
+ }
+ .navbar{
+     width: 80%;
+     height: 85px;
+     margin:0 25px 10px 0 ;
+     flex-shrink:0;
+     border-radius: 20px 0px 20px 0px;
+     border: 1px solid rgba(0, 0, 0, 0.70);
+     background:var(--primary-color);
+     display: flex;
+     justify-content: space-evenly;
+     align-items: center;
+     overflow: hidden
+ }
+ .navbar a{
+     position:relative;
+     width: 20%;
+     height: var(--MX_height);
+     margin:0 5px 0 5px;
+     display: flex;
+     align-items: center;
+     justify-content: center;
+     color:var(--secondary-color);
+     font-size: 17px;
+     font-style: normal;
+     font-weight: 400;
+     line-height: normal;
+     letter-spacing: 0.3px;  
+     text-decoration: none;
+ }
+ #n2{
+     margin: 0 5px 0 0 ;
+     background-color:var(--secondary-color);
+     color: var(--primary-color);
+ }
+ .content{
+     width: 100%;
+     height: 60%;
+     display: flex;
+     flex-direction: column;
+     justify-content: space-evenly;
+ }
+ .c1{
+    width:60%;
+     color:var(--secondary-color);
+     font-family: Impact;
+     font-size: 65px;
+     font-style: normal;
+     font-weight: 400;
+     margin-top:60px;
+     margin-left:40px ;
+     padding-top:60px;
+     padding-left:90px ;
+     line-height: normal;
+     letter-spacing: 6.9px;
+ }
+ .c1 span{
+     color:var(--primary-color);
+ }
+ #c2{
+     width:80%;
+     color:var(--secondary-color);
+     padding: 15px;
+     font-family: Impact;
+     font-size: 20px;
+     font-style: normal;
+     font-weight: 400;
+     line-height: normal;
+     letter-spacing: 1.25px;
+     text-align:start;
+ }
+ .c2{
+    width:60%;
+    height:15%;
+     display: flex;
+     justify-content: center;
+     align-items: center;
+     margin-left:40px ;
+ }
+ #c3{
+     width:200px;
+     height: 40px;
+     flex-shrink: 0;
+     border-radius: 20px;
+     border:none;
+     background:var(--primary-color);
+     color:var(--secondary-color);
+     text-align: center;
+     font-family: Impact;
+     font-size: 25px;
+     font-style: normal;
+     font-weight: 200;
+     line-height: normal;
+     letter-spacing: 0.75px;
+ }
+ #c3:hover{
+ border:var(--secondary-color) solid 2px;}
+ .bottom{
+     width: var(--MX_width);
+     height: 25vh;
+     background:var(--primary-color);
+     display: flex;
+     justify-content: center;
+     align-items: center;
+ }
+ .con{
+    width:60%;
+    height:90%;
+    background-color: var(--secondary-color);
+    border-radius: 20px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+ }
+.chov{
+    margin:0 10px 0 10px;
+    width:90%;
+    height:90%;
+    background:var(--primary-color);
+    border-radius:10px;
+}
+.chov:hover{
+    transform: scale(1.2);
+    border:solid 2px #FFFFFF;
+}
+#if1,#if2,#if3{
+    width:100%;
+    height:100%;
+    border-radius:10px;
+    background-color: var(--secondary-color);
+} 
