@@ -23,7 +23,7 @@ function Login() {
     useEffect(() => {
         console.log("erorrvalues")
         if (Object.keys(erorrvalues).length === 0 && isSubmit) {
-         axios.post("http://localhost:9000/",values)
+         axios.post("http://localhost:9000/signup",values)
          .then((res)=>{console.log(res.data)})
          .catch(err=>console.log(err))
         }

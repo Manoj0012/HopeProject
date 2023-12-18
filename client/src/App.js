@@ -3,7 +3,6 @@ import Home from './admin/Home';
 import Main from './admin/Main';
 import About from './admin/aboutus';
 import Login from './admin/login';
-import SampleLogin from './admin/SampleLogin';
 import { Routes,Route, } from "react-router-dom";
 function App() {
   return (
