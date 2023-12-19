@@ -32,7 +32,7 @@ return(<header>
                <a href="" id="n4">Stories</a>
                <a href="" id="n5">News</a>
                <a href="" id="n6">Causes</a>
-               <a href="/login" id="n7">Login</a>
+               <a href="/signup" id="n7">Login</a>
                 </div>
             </div>
         </div>
