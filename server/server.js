@@ -26,17 +26,18 @@ app.post("/signup",async(req,res)=>{
  .then(user=>res.send(true))
  .catch(err=>res.json(err))}
 })
-app.post("/signup",async(req,res)=>{
-
-  const {name,email,pass} = req.body;
-    const check=await Signupmodel.findOne({email:email})
-    console.log(check)
-    if(check){
-     if(check.pass==pass){}
-    }
-    else{
- Signupmodel.create({name:name,email:email,pass:pass})
- .then(user=>res.send(true))
- .catch(err=>res.json(err))}
+app.post("/login",async(req,res)=>{
+  const {email,pass} = req.body;
+  await Signupmodel.findOne({email:email})
+ .then(user=>{
+  if(user){
+  if(user.pass==pass){
+  res.send("!password")}
+ else{res.send("password not correct")}
+}
+else{
+  res.send("user not found")
+}})
+ .catch(err=>res.json(err))
 })
 app.listen(9000);

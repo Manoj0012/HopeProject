@@ -1,9 +1,11 @@
 import '../assects/styles/Login&signup.css'
 import logo from '../assects/Image&Svg/Logo.png';
 import axios from 'axios';
+import {toast} from 'react-toastify';
 import { useEffect, useState } from 'react';
 import { useNavigate } from "react-router-dom";
 import {validate, validateLogin} from "./Login&signupval";
+
 
 function Login() {
     const navigate = useNavigate();
@@ -25,14 +27,17 @@ function Login() {
         if (Object.keys(erorrvalues).length === 0 && isSubmit) {
             axios.post("http://localhost:9000/login", values)
                 .then((res) => {
-                    let data = res.data;
-                    if(data){
-                        navigate("/")
-                        alert("sucess")
-                    }
+                    // console.log(res.data)
+                   if(res.data==="Success"){
+                    toast.success("Login Successfully")
+                    navigate("/dashboard")}
+                else if(res.data==="!password"){
+                    console.log(res.data)
+                    toast.error("Wrong Password")
+                }
                     else{
-                        console.log("user exits")
-                        navigate("/login")
+                        console.log(res.data)
+                        toast.error(res.data)
                     }
                 })
                 .catch(err => console.log(err))
@@ -57,7 +62,7 @@ function Login() {
                         {erorrvalues.pass ? <div id="error-msg">{erorrvalues.pass}</div> : null}
                         <button id="inputbutton" onClick={handlesignup} type='submit'>{action}</button>
                         <div className='Login-tranction switcher'><p>Need a account?</p>
-                        <a href="/signup"id="trans-button">Signup</a></div>
+                        <a href="/signup"id="trans-link">Signup</a></div>
 
                     </ul>
                 </form>

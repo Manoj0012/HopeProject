@@ -107,13 +107,14 @@ align-items: center;
 border-top:solid 1px #A7A7A7;
 color: #A7A7A7;
 }
-#trans-button{
+#trans-link{
     width:47px;
     height:27px;
     margin:5px;
-    font-size:17px;
+    font-size:20px;
     font-weight: 600;
     color:var(--primary);
+    text-decoration: none;
     background:none;
     border: none;
 }

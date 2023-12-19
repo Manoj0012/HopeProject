@@ -4,6 +4,7 @@ import axios from 'axios';
 import { useEffect, useState } from 'react';
 import { useNavigate } from "react-router-dom";
 import {validate} from "./Login&signupval";
+import { toast } from 'react-toastify';
 
 function Signup() {
     const navigate = useNavigate();
@@ -26,12 +27,12 @@ function Signup() {
             axios.post("http://localhost:9000/signup", values)
                 .then((res) => {
                     let data = res.data;
-                    if(data){
+                    if(data===""){
                         navigate("/")
-                        alert("sucess")
+                       toast.success("Signed up Sucessfully")
                     }
                     else{
-                        console.log("user exits")
+                        toast.error("User already exit's")
                         navigate("/login")
                     }
                 })
@@ -63,7 +64,7 @@ function Signup() {
                         {erorrvalues.cpass ? <div id="error-msg">{erorrvalues.cpass}</div> : null}
                         <button id="inputbutton" onClick={handlesignup} type='submit'>{action}</button>
                         <div className='Login-tranction switcher'><p>Already have a account?</p>
-                            <a href="/login"id="trans-button">Login</a></div>
+                            <a href="/login"id="trans-link">Login</a></div>
 
                     </ul>
                 </form>
