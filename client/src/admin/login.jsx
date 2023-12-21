@@ -13,7 +13,7 @@ function Login() {
     const [values, setvalues] = useState({  email: "", pass: ""})
     const [erorrvalues, seterrorvalues] = useState({});
     const [isSubmit, setisSubmit] = useState(false)
-    // axios.defaults.withCredentials=true;
+    axios.defaults.withCredentials=true;
     function handleInput(e) {
         const { name, value } = e.target;
         setvalues({ ...values, [name]: value })

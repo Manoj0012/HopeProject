@@ -1,8 +1,22 @@
 import '../assects/styles/dashboard.css'
 import logo from '../assects/Image&Svg/Logo.png'
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
 import axios from 'axios'
+import { Navigate } from 'react-router'
 export default function Dashboard(){ 
+    axios.defaults.withCredentials=true;
+    useEffect(()=>{
+    axios.get("http://localhost:9000/dashboard")
+    .then(response=>{
+        if(response.data!=="Success"){
+            Navigate('/login')
+        }
+        console.log(response.data)
+    })
+    .catch(err=>{
+        console.log(err)
+    })
+    },[])
     const [addpost,setAddpost]=useState({
         title:"",detail:"",phonepay:"",whatsapp:"",gpay:""
     })
