@@ -32,8 +32,8 @@ app.post("/login",async(req,res)=>{
  .then(user=>{
   if(user){
   if(user.pass==pass){
-  res.send("!password")}
- else{res.send("password not correct")}
+  res.send("Success")}
+ else{res.send("!password")}
 }
 else{
   res.send("user not found")

@@ -8,10 +8,14 @@ export default function dashboard(){
             </div>
             <div className="dash-main">
             <div className="dash-info"><ul>
-                <li>Add</li>
-                <li>Manage</li>
-                <li></li>
-                <li>Profile</li></ul></div>
+                <li><button>ADD</button></li>
+                <div className="add">
+                    <input type='text' />
+                    <button>submit</button>
+                </div>
+                <li><a href=''>Manage Post</a></li>
+                {/* <li></li> */}
+                <li><a href=''>Profile</a></li></ul></div>
             <div className='dash-service'></div>
             </div>
     </div>)
