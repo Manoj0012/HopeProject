@@ -27,7 +27,7 @@ function Signup() {
             axios.post("http://localhost:9000/signup", values)
                 .then((res) => {
                     let data = res.data;
-                    if(data===""){
+                    if(data){
                         navigate("/")
                        toast.success("Signed up Sucessfully")
                     }

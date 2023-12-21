@@ -2,17 +2,19 @@ const express=require("express");
 const bodyparser=require("body-parser");
 const mongodb=require("mongoose")
 const cors = require('cors');
+const bcrypt=require('bcryptjs-react')
 const Signupmodel=require('./models/signup')
+const jwt=require('jsonwebtoken')
+const cookieparser=require('cookie-parser')
 const app=express();
-app.use(cors())
+app.use(cookieparser())
+app.use(cors(
+))
 app.use(express.json());
 mongodb.connect("mongodb://127.0.0.1:27017/Hope");
 
 
-
-
 app.post("/signup",async(req,res)=>{
-
   const {name,email,pass} = req.body;
     const check=await Signupmodel.findOne({name:name})
     console.log(check)
@@ -30,12 +32,18 @@ app.post("/login",async(req,res)=>{
   await Signupmodel.findOne({email:email})
  .then(user=>{
   if(user){
-  if(user.pass==pass){
-  res.send("Success")}
- else{res.send("!password")}
-}
+  bcrypt.compare(pass,user.pass,(err,res)=>{
+    if(res){
+      console.log(res)
+      const token=jwt.sign({email:user.email},"jwt-secret-key")
+      res.cookie("token",token)
+      res.send("Success")
+    }
+    else{res.send("!password")}
+  }
+ )}
 else{
-  res.send("user not found")
+  res.send("!user")
 }})
  .catch(err=>res.json(err))
 })
