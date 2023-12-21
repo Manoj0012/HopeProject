@@ -4,7 +4,6 @@ const mongodb=require("mongoose")
 const cors = require('cors');
 const Signupmodel=require('./models/signup')
 const app=express();
-
 app.use(cors())
 app.use(express.json());
 mongodb.connect("mongodb://127.0.0.1:27017/Hope");
@@ -40,4 +39,6 @@ else{
 }})
  .catch(err=>res.json(err))
 })
-app.listen(9000);
+app.listen(9000,()=>{
+console.log(`http://localhost:9000`)
+});
