@@ -2,14 +2,15 @@ import '../assects/styles/dashboard.css'
 import logo from '../assects/Image&Svg/Logo.png'
 import { useEffect, useState } from 'react'
 import axios from 'axios'
-import { Navigate } from 'react-router'
+import { useNavigate } from 'react-router'
 export default function Dashboard(){ 
     axios.defaults.withCredentials=true;
+    const nav = useNavigate()
     useEffect(()=>{
     axios.get("http://localhost:9000/dashboard")
     .then(response=>{
         if(response.data!=="Success"){
-            Navigate('/login')
+            nav('/login')
         }
         console.log(response.data)
     })
