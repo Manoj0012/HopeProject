@@ -4,9 +4,14 @@ const mongodb = require("mongoose")
 const cors = require('cors');
 const bcrypt = require('bcrypt')
 const Signupmodel = require('./models/signup')
+const Userpostschema=require('./models/userpost')
 const jwt = require('jsonwebtoken')
 const cookieparser = require("cookie-parser")
 const app = express();
+app.use(express.json());
+app.use(bodyparser.urlencoded(
+  {extended:true}
+))
 app.use(cookieparser());
 app.use(cors({
   origin: ["http://localhost:3000"],
@@ -14,7 +19,6 @@ app.use(cors({
   credentials: true
 }
 ));
-app.use(express.json());
 mongodb.connect("mongodb://127.0.0.1:27017/Hope");
 
 
@@ -72,13 +76,46 @@ const verifyuser = (req, res, next) => {
       if (err) { return res.json("!wrongtoken") }
       const user = await Signupmodel.findOne({ email: decoded.email })
       req.user = user;
-      console.log(user)
+      // console.log(user)
       next();
     })
   }
 }
 app.get("/dashboard", verifyuser, (req, res) => {
   return res.json("Success")
+})
+app.get("/dashboarddata",verifyuser,(req, res) => {
+  user=req.user
+  res.json(user)
+  console.log(user)
+})
+app.post("/addpost", async (req, res) => {
+  try {
+    const { name} = req.body; 
+    const user = await Signupmodel.findOne({ email:name });
+    console.log(user)
+
+    if (!user) {
+      return res.status(404).send("User not found");
+    }
+    const Userpostschema = {
+      title: req.body.title,
+      detail: req.body.detail, 
+      gpay: req.body.gpay,
+      phonepay: req.body.phonepay,
+      whatsapp: req.body.whatsapp
+    };
+    console.log(Userpostschema)
+    user.post.push(Userpostschema);
+    await user.save();
+    res.send("success");
+  } catch (error) {
+    console.error(error);
+    res.status(500).send("Internal Server Error");
+  }
+});
+app.get("/getpost", async (req, res) => {
+ 
 })
 app.listen(9000, () => {
   console.log(`http://localhost:9000`)

@@ -6,34 +6,39 @@ import { useNavigate } from 'react-router'
 export default function Dashboard(){ 
     axios.defaults.withCredentials=true;
     const nav = useNavigate()
-    useEffect(()=>{
-    axios.get("http://localhost:9000/dashboard")
-    .then(response=>{
-        if(response.data!=="Success"){
-            nav('/login')
-        }
-        console.log(response.data)
-    })
-    .catch(err=>{
-        console.log(err)
-    })
-    },[])
     const [addpost,setAddpost]=useState({
-        title:"",detail:"",phonepay:"",whatsapp:"",gpay:""
+        name:"",title:"",detail:"",phonepay:"",whatsapp:"",gpay:""
     })
     console.log(addpost)
     function handleInput(e) {
         const { name, value } = e.target;
         setAddpost({ ...addpost, [name]: value })
     }
-     const handlesubmit=(addpost)=>{
+    useEffect(()=>{
+    axios.get("http://localhost:9000/dashboard")
+    .then(response=>{
+        if(response.data!=="Success"){
+            nav('/login')
+        }
+        else{axios.get("http://localhost:9000/dashboarddata")
+        .then(res=>{
+            setAddpost({name:res.data.email})
+        })}
+    })
+    .catch(err=>{
+        console.log(err)
+    })
+    },[])
+     const handlesubmit=()=>{
       axios.post("http://localhost:9000/addpost",addpost)
       .then(res=>{
         console.log(res.data)
+      }).catch(err=>{
+        console.log(err)
       })
      }
     return(
-    <div class="container-dashboard">
+    <div className="container-dashboard">
         <div className="dashboard-nav flex">
                 <img id="dash-logo" src={logo} />
             </div>

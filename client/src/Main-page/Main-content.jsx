@@ -4,7 +4,9 @@ import whatsapp from '../assects/Image&Svg/whatsapp.svg'
 import phonepe from '../assects/Image&Svg/phonepe.svg'
 import gpay from '../assects/Image&Svg/gpay.svg'
 import Logo from '../assects/Image&Svg/Logo.png'
+import { useEffect } from 'react';
 export default function Main_content(props){
+    useEffect()
     return(  
         <div className="main flex">
                 <div className="main-img"><img id="m1" src={props.img}/></div>
