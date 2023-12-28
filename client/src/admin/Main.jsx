@@ -1,4 +1,4 @@
-import Nav from '../Homepage/header';
+import Nav from '../Main-page/Main-nav';
 import Main_content from '../Main-page/Main-content'
 import Logo from '../assects/Image&Svg/main1.png'
 import { useEffect, useState } from 'react';
