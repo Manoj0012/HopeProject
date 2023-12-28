@@ -4,9 +4,9 @@ const mongodb = require("mongoose")
 const cors = require('cors');
 const bcrypt = require('bcrypt')
 const Signupmodel = require('./models/signup')
-const Userpostschema=require('./models/userpost')
 const jwt = require('jsonwebtoken')
-const cookieparser = require("cookie-parser")
+const cookieparser = require("cookie-parser");
+const userpostmodel = require("./models/userpost");
 const app = express();
 app.use(express.json());
 app.use(bodyparser.urlencoded(
@@ -67,12 +67,6 @@ const verifyuser = (req, res, next) => {
   if (!token) { return res.json("!token") }
   else {
     jwt.verify(token, "jwt-secret-key", async (err, decoded) => {
-
-      // Get email from decoded
-      // Get user from database with email
-      // Attach user to response or request
-      // req.user = {}
-
       if (err) { return res.json("!wrongtoken") }
       const user = await Signupmodel.findOne({ email: decoded.email })
       req.user = user;
@@ -84,38 +78,34 @@ const verifyuser = (req, res, next) => {
 app.get("/dashboard", verifyuser, (req, res) => {
   return res.json("Success")
 })
-app.get("/dashboarddata",verifyuser,(req, res) => {
-  user=req.user
+app.get("/dashboarddata",verifyuser,(req,res)=>{
+   const user=req.user
   res.json(user)
-  console.log(user)
+  // console.log(user)
 })
-app.post("/addpost", async (req, res) => {
-  try {
-    const { name} = req.body; 
-    const user = await Signupmodel.findOne({ email:name });
-    if (!user) {
-      return res.status(404).send("User not found");
-    }
-    const Userpostschema = {
-      title: req.body.title,
-      detail: req.body.detail, 
-      gpay: req.body.gpay,
-      phonepay: req.body.phonepay,
-      whatsapp: req.body.whatsapp
-    };
-    console.log(Userpostschema)
-    user.post.push(Userpostschema);
-    await user.save();
-    res.send("success");
-  } catch (error) {
-    console.error(error);
-    res.status(500).send("Internal Server Error");
+app.post("/addpost",async(req,res)=>{
+  try{
+  const userpost=new userpostmodel({
+    owner:req.body.owner,
+    name:req.body.name,
+    title: req.body.title,
+    detail: req.body.detail,
+    gpay:req.body.gpay,
+    phonepay:req.body.phonepay,
+    whatsapp:req.body.whatsapp
+  })
+  await userpost.save()
+  res.send("post Saved")}
+  catch(err){if(err){console.log(err)}}
+})
+app.get("/getpost",async(req,res)=>{
+  try{
+    const posts=await userpostmodel.find() 
+    res.json(posts)
   }
-});
-app.get("/getpost", async (req, res) => {
- const mainpost=await Signupmodel.find()
- res.json(mainpost)
-
+     catch{if(err){
+      console.log(err)
+     }}
 })
 app.listen(9000, () => {
   console.log(`http://localhost:9000`)

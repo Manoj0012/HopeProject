@@ -3,11 +3,12 @@ import logo from '../assects/Image&Svg/Logo.png'
 import { useEffect, useState } from 'react'
 import axios from 'axios'
 import { useNavigate } from 'react-router'
+import { toast } from 'react-toastify'
 export default function Dashboard(){ 
     axios.defaults.withCredentials=true;
     const nav = useNavigate()
     const [addpost,setAddpost]=useState({
-        name:"",title:"",detail:"",phonepay:"",whatsapp:"",gpay:""
+        owner:"",name:"",title:"",detail:"",phonepay:"",whatsapp:"",gpay:""
     })
     console.log(addpost)
     function handleInput(e) {
@@ -22,7 +23,7 @@ export default function Dashboard(){
         }
         else{axios.get("http://localhost:9000/dashboarddata")
         .then(res=>{
-            setAddpost({name:res.data.email})
+            setAddpost({owner:res.data._id,name:res.data.name})
         })}
     })
     .catch(err=>{
@@ -32,7 +33,7 @@ export default function Dashboard(){
      const handlesubmit=()=>{
       axios.post("http://localhost:9000/addpost",addpost)
       .then(res=>{
-        console.log(res.data)
+        toast.success(res.data)
       }).catch(err=>{
         console.log(err)
       })
