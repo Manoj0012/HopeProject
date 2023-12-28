@@ -114,8 +114,8 @@ app.post("/addpost", async (req, res) => {
 });
 app.get("/getpost", async (req, res) => {
  const mainpost=await Signupmodel.find()
-console.log(mainpost)
-res.json(mainpost)
+ res.json(mainpost)
+
 })
 app.listen(9000, () => {
   console.log(`http://localhost:9000`)

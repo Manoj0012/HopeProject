@@ -4,18 +4,21 @@ import Logo from '../assects/Image&Svg/main1.png'
 import { useEffect, useState } from 'react';
 import axios from 'axios';
 
-function Main(props){
-    const [postdata,setPostdata]=useState([])
-    console.log(postdata)
-       
+function Main(){
+    const [postdata,setPostdata]=useState([])   
+    console.log(postdata)  
     useEffect(()=>{
         axios.get("http://localhost:9000/getpost")
         .then(res=>{
-            const data={
-                name:res.name
-            }
-            console.log(data)
-            // setPostdata(res)
+           const userdata=res.data 
+           const accumdata=[]
+           userdata.forEach(user => {
+            const postarray={
+                name:user.name,
+                 post:user.post}
+               accumdata.push(postarray)
+          });
+            setPostdata(accumdata)
         })
         .catch(err=>{
             console.log(err)
@@ -25,6 +28,9 @@ function Main(props){
         <div >
             <Nav/>
             <div className="main-content "> 
+            {postdata.map(user => (
+                <Main_content key={user.name} name={user.name} posts={user.post}/>
+            ))}
             </div>
         </div>
     )
