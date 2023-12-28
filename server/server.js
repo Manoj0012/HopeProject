@@ -93,8 +93,6 @@ app.post("/addpost", async (req, res) => {
   try {
     const { name} = req.body; 
     const user = await Signupmodel.findOne({ email:name });
-    console.log(user)
-
     if (!user) {
       return res.status(404).send("User not found");
     }
@@ -115,7 +113,9 @@ app.post("/addpost", async (req, res) => {
   }
 });
 app.get("/getpost", async (req, res) => {
- 
+ const mainpost=await Signupmodel.find()
+console.log(mainpost)
+res.json(mainpost)
 })
 app.listen(9000, () => {
   console.log(`http://localhost:9000`)
